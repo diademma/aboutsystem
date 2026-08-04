@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aboutsystem.app"
+    namespace = "com.v2ray.ang"
     compileSdk = 37
 
     defaultConfig {
@@ -39,6 +39,7 @@ android {
     productFlavors {
         create("fdroid") {
             dimension = "distribution"
+            applicationIdSuffix = ".fdroid"
             buildConfigField("String", "DISTRIBUTION", "\"F-Droid\"")
         }
         create("playstore") {
