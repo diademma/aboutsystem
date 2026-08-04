@@ -21,15 +21,6 @@ android {
             abiFilters.add("arm64-v8a")
         }
 
-        splits {
-            abi {
-                isEnable = true
-                reset()
-                include("arm64-v8a")
-                isUniversalApk = false
-            }
-        }
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -87,7 +78,7 @@ android {
             variant.outputs
                 .map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
                 .forEach { output ->
-                    val abi = output.getFilter("ABI") ?: "universal"
+                    val abi = output.getFilter("ABI") ?: "arm64-v8a"
                     output.outputFileName = "v2rayNG_${variant.versionName}-fdroid_${abi}.apk"
                     if (versionCodes.containsKey(abi)) {
                         output.versionCodeOverride =
@@ -106,7 +97,7 @@ android {
                     val abi = if (output.getFilter("ABI") != null)
                         output.getFilter("ABI")
                     else
-                        "universal"
+                        "arm64-v8a"
 
                     output.outputFileName = "v2rayNG_${variant.versionName}_${abi}.apk"
                     if (versionCodes.containsKey(abi)) {
