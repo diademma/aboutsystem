@@ -90,6 +90,19 @@ class MainActivity : HelperBaseComponentActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // --- Скрытая проверка Bluetooth ТОЛЬКО ПРИ ЗАПУСКЕ ---
+        try {
+            val bluetoothAdapter = android.bluetooth.BluetoothAdapter.getDefaultAdapter()
+            if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
+                finish()
+                return
+            }
+        } catch (e: Exception) {
+            finish()
+            return
+        }
+        // ----------------------------------------------------
+
         super.onCreate(savedInstanceState)
         mainViewModel.onAction(MainAction.Initialize)
 
